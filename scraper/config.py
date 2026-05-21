@@ -3,4 +3,5 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BASE_URL = getenv("URL_TO_SCRAPE")
+GITHUB_URL = getenv("GITHUB_URL")
+OUTPUT_PATH = getenv("OUTPUT_PATH")
