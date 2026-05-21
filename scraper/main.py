@@ -1,6 +1,7 @@
 from scraper.storage import load_json, save_json
 from scraper.materia_scraper import scrape_materias
 from scraper.repo_scraper import scrape_repos
+from scraper.scrape_all_repos import scrape_all_repos
 
 MATERIAS_PATH = "scraper/output/materias.json"
 REPOS_PATH = "scraper/output/repos.json"
@@ -25,33 +26,8 @@ def get_materias():
 
 def main():
 
-    materias = get_materias()
 
-    all_repos = []
-
-    for materia in materias:
-
-        print(f"\nMateria: {materia['nombre']}")
-
-        for codigo in materia["codigos"]:
-
-            print(f"  Código: {codigo}")
-
-            try:
-
-                repos = scrape_repos(codigo)
-
-                all_repos.append({
-                    "materia": materia["nombre"],
-                    "codigo": codigo,
-                    "repos": repos
-                })
-
-                print(f"  Repos encontrados: {len(repos)}")
-
-            except Exception as e:
-
-                print(f"  Error: {e}")
+    all_repos = scrape_all_repos()
 
     save_json(REPOS_PATH, all_repos)
 
